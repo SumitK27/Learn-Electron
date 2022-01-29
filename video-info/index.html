@@ -8,5 +8,22 @@
     </head>
     <body>
         <h1>Video Info</h1>
+        <form action="">
+            <div>
+                <label for="video">Select a Video</label>
+                <input type="file" name="video" id="video" accept="video/*" />
+            </div>
+            <button type="submit">Get Info</button>
+        </form>
+
+        <script>
+            const formElement = document.querySelector("form");
+
+            formElement.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const file = document.querySelector("input").files[0];
+            });
+        </script>
     </body>
 </html>
