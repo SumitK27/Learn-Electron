@@ -1,5 +1,9 @@
 # **Electron** <!-- omit in toc -->
 
+[![wakatime](https://wakatime.com/badge/user/51dfdeb9-1041-42fb-9208-3de488dcae61/project/4069e9a5-039d-4b89-9944-2ae2fb8236e4.svg?style=for-the-badge)](https://wakatime.com/badge/user/51dfdeb9-1041-42fb-9208-3de488dcae61/project/4069e9a5-039d-4b89-9944-2ae2fb8236e4)
+
+A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s Course [Electron for Desktop Apps The Complete Developer's Guide](https://www.udemy.com/course/electron-react-tutorial/)
+
 1. [**About**](#about)
    1. [**Limitation of Browser**](#limitation-of-browser)
    2. [**Difference**](#difference)
