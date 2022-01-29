@@ -13,6 +13,7 @@
    3. [**Send data from Renderer to Main**](#send-data-from-renderer-to-main)
    4. [**Send Data from Main to Renderer**](#send-data-from-main-to-renderer)
 6. [**Custom Menu**](#custom-menu)
+7. [**Add New Window**](#add-new-window)
 
 ## **About**
 
@@ -181,6 +182,39 @@ const menuTemplate = [
                     process.platform === "darwin" ? "Command+Q" : "Ctrl+Q",
                 click() {
                     app.quit();
+                },
+            },
+        ],
+    },
+];
+```
+
+## **Add New Window**
+
+-   Add a new window on click of a menu item.
+
+```javascript
+let addWindow;
+...
+function createAddWindow() {
+    addWindow = new BrowserWindow({
+        width: 300, // set window width in pixel
+        height: 200, // set window height in pixel
+        title: "Add New Todo", // set window title
+    });
+
+    addWindow.loadFile("add.html");
+}
+
+// Create a Menu Template
+const menuTemplate = [
+    {
+        label: "File",
+        submenu: [
+            {
+                label: "Add ToDo",
+                click() {
+                    createAddWindow();
                 },
             },
         ],
