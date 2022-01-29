@@ -16,13 +16,14 @@
         </form>
 
         <script>
+            const { ipcRenderer } = require("electron");
             const formElement = document.querySelector("form");
 
             formElement.addEventListener("submit", (event) => {
                 event.preventDefault();
 
                 const value = document.getElementById("todo").value;
-                console.log(value);
+                ipcRenderer.send("todo:add", value);
             });
         </script>
     </body>

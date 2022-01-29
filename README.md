@@ -15,6 +15,8 @@
 6. [**Custom Menu**](#custom-menu)
 7. [**Add New Window**](#add-new-window)
 8. [**Function based on Environment**](#function-based-on-environment)
+9. [**Garbage Collection**](#garbage-collection)
+10. [**Roles**](#roles)
 
 ## **About**
 
@@ -246,4 +248,40 @@ if (process.env.NODE_ENV === "development") {
         ],
     });
 }
+```
+
+## **Garbage Collection**
+
+-   Closing a window doesn't frees up the memory in Electron.
+-   We have to manually specify it to work the way JavaScript's Garbage collection works.
+
+```javascript
+function createAddWindow() {
+    ...
+    // Delete the Add Window
+    addWindow.on("closed", () => {
+        addWindow = null;
+    });
+}
+
+// Get todo from Add Window and send it to Main Window
+ipcMain.on("todo:add", (event, todo) => {
+    mainWindow.webContents.send("todo:add", todo);
+
+    // Close the add Window
+    addWindow.close();
+});
+```
+
+## **Roles**
+
+-   There are several predefined roles that are made available by Electron.
+-   These roles allow to patch things up easily in your app.
+-   eg. adding back the reload menu item to your custom menu without need to create one again.
+
+```javascript
+menuTemplate.push({
+    label: "View",
+    submenu: [{ role: "reload" }],
+});
 ```

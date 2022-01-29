@@ -1,5 +1,4 @@
-const electron = require("electron");
-const { app, BrowserWindow, Menu } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 
 let mainWindow;
 let addWindow;
@@ -37,7 +36,20 @@ function createAddWindow() {
     });
 
     addWindow.loadFile("add.html");
+
+    // Delete the Add Window
+    addWindow.on("closed", () => {
+        addWindow = null;
+    });
 }
+
+// Get todo from Add Window and send it to Main Window
+ipcMain.on("todo:add", (event, todo) => {
+    mainWindow.webContents.send("todo:add", todo);
+
+    // Close the add Window
+    addWindow.close();
+});
 
 // Create a Menu Template
 const menuTemplate = [
@@ -70,6 +82,7 @@ if (process.env.NODE_ENV === "development") {
     menuTemplate.push({
         label: "View",
         submenu: [
+            { role: "reload" },
             {
                 label: "Toggle Developer Tools",
                 accelerator:
