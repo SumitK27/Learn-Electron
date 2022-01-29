@@ -51,6 +51,10 @@ ipcMain.on("todo:add", (event, todo) => {
     addWindow.close();
 });
 
+function clearTodoList() {
+    mainWindow.webContents.send("todo:clear");
+}
+
 // Create a Menu Template
 const menuTemplate = [
     {
@@ -60,6 +64,12 @@ const menuTemplate = [
                 label: "Add ToDo",
                 click() {
                     createAddWindow();
+                },
+            },
+            {
+                label: "Clear ToDos",
+                click() {
+                    clearTodoList();
                 },
             },
             {

@@ -18,5 +18,9 @@
         ipcRenderer.on("todo:add", (event, todo) => {
             todoListElement.innerHTML += `<li>${todo}</li>`;
         });
+
+        ipcRenderer.on("todo:clear", () => {
+            todoListElement.innerHTML = "";
+        });
     </script>
 </html>
