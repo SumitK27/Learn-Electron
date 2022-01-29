@@ -12,6 +12,7 @@
    2. [**Enable Node Modules on Renderer**](#enable-node-modules-on-renderer)
    3. [**Send data from Renderer to Main**](#send-data-from-renderer-to-main)
    4. [**Send Data from Main to Renderer**](#send-data-from-main-to-renderer)
+6. [**Custom Menu**](#custom-menu)
 
 ## **About**
 
@@ -147,4 +148,42 @@ ipcRenderer.on("video:metadata", (event, duration) => {
 
     resultElement.innerHTML = `Video is ${duration} seconds`;
 });
+```
+
+## **Custom Menu**
+
+-   Adding a Custom menu removes all the predefined functionality of the default Electron menu.
+-   Every Menu Item has a label, optionally an accelerator, a sub-menu and a click function.
+
+```javascript
+const { app, BrowserWindow, Menu } = require("electron");
+
+let mainWindow;
+app.on("ready", () => {
+    ...
+    // Use Menu from the Menu Template
+    const mainMenu = Menu.buildFromTemplate(menuTemplate);
+    // Add Menu to the Application
+    Menu.setApplicationMenu(mainMenu);
+});
+
+// Create a Menu Template
+const menuTemplate = [
+    {
+        label: "File",
+        submenu: [
+            {
+                label: "Add ToDo",
+            },
+            {
+                label: "Quit",
+                accelerator:
+                    process.platform === "darwin" ? "Command+Q" : "Ctrl+Q",
+                click() {
+                    app.quit();
+                },
+            },
+        ],
+    },
+];
 ```
