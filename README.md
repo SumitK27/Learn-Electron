@@ -14,6 +14,7 @@
    4. [**Send Data from Main to Renderer**](#send-data-from-main-to-renderer)
 6. [**Custom Menu**](#custom-menu)
 7. [**Add New Window**](#add-new-window)
+8. [**Function based on Environment**](#function-based-on-environment)
 
 ## **About**
 
@@ -178,6 +179,7 @@ const menuTemplate = [
             },
             {
                 label: "Quit",
+                // Platform based hotkeys
                 accelerator:
                     process.platform === "darwin" ? "Command+Q" : "Ctrl+Q",
                 click() {
@@ -220,4 +222,28 @@ const menuTemplate = [
         ],
     },
 ];
+```
+
+## **Function based on Environment**
+
+-   Show Development Tools on if its Development environment.
+
+```javascript
+if (process.env.NODE_ENV === "development") {
+    menuTemplate.push({
+        label: "View",
+        submenu: [
+            {
+                label: "Toggle Developer Tools",
+                accelerator:
+                    process.platform === "darwin"
+                        ? "Command+Alt+I"
+                        : "Ctrl+Shift+I",
+                click(item, focusedWindow) {
+                    focusedWindow.toggleDevTools();
+                },
+            },
+        ],
+    });
+}
 ```
