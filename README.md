@@ -22,14 +22,15 @@ A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s
 9. [**Garbage Collection**](#garbage-collection)
 10. [**Roles**](#roles)
 11. [**Browser Window Configuration**](#browser-window-configuration)
-12. [**Window Resolution**](#window-resolution)
-13. [**Frame**](#frame)
-14. [**Window Resizing**](#window-resizing)
-15. [**Show**](#show)
-16. [**Tray**](#tray)
-17. [**Create Tray**](#create-tray)
-18. [**Adding Event Listener**](#adding-event-listener)
-19. [**Bounds**](#bounds)
+    1. [**Window Resolution**](#window-resolution)
+    2. [**Frame**](#frame)
+    3. [**Window Resizing**](#window-resizing)
+    4. [**Show**](#show)
+    5. [**Skip Taskbar**](#skip-taskbar)
+12. [**Tray**](#tray)
+    1. [**Create Tray**](#create-tray)
+    2. [**Adding Event Listener**](#adding-event-listener)
+13. [**Bounds**](#bounds)
     1. [**Get Bounds**](#get-bounds)
         1. [**Through Window Position**](#through-window-position)
         2. [**Through Event**](#through-event)
@@ -305,7 +306,7 @@ menuTemplate.push({
 
 ## **Browser Window Configuration**
 
-### **Window Resolution**
+#### **Window Resolution**
 
 -   We can set the default width and height of the window with the keys `width` and `height` and set it to the pixel value.
 
@@ -316,7 +317,7 @@ mainWindow = new BrowserWindow({
 });
 ```
 
-### **Frame**
+#### **Frame**
 
 -   The frame contains the menu bar and the title bar to minimize, full-screen or close the application.
 -   `frame` can be set to false if we don't want to display the frame.
@@ -327,7 +328,7 @@ mainWindow = new BrowserWindow({
 });
 ```
 
-### **Window Resizing**
+#### **Window Resizing**
 
 -   We can set whether we want the user to resize our app screen or not.
 -   `resizable` is the flag used to enable or disable the resizing of the window.
@@ -339,7 +340,7 @@ mainWindow = new BrowserWindow({
 });
 ```
 
-### **Show**
+#### **Show**
 
 -   `show` allows you to either show or hide the window when the application is launched.
 -   By default `show` is set to `true`.
@@ -350,9 +351,20 @@ mainWindow = new BrowserWindow({
 });
 ```
 
+#### **Skip Taskbar**
+
+-   `skipTaskbar` allows you to hide the window's (application's) Taskbar Icon.
+-   By default `skipTaskbar` is set to `false`.
+
+```javascript
+mainWindow = new BrowserWindow({
+    skipTaskbar: false,
+});
+```
+
 ## **Tray**
 
-### **Create Tray**
+#### **Create Tray**
 
 -   Electron has a Tray object which allows you to create a tray icon for your application.
 -   Every Tray has an icon.
@@ -371,7 +383,7 @@ app.on("ready", () => {
 });
 ```
 
-### **Adding Event Listener**
+#### **Adding Event Listener**
 
 ```javascript
 let tray;
