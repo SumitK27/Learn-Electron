@@ -27,11 +27,12 @@ A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s
 10. [**Garbage Collection**](#garbage-collection)
 11. [**Roles**](#roles)
 12. [**Browser Window Configuration**](#browser-window-configuration)
-    1. [**Window Resolution**](#window-resolution)
-    2. [**Frame**](#frame)
-    3. [**Window Resizing**](#window-resizing)
-    4. [**Show**](#show)
-    5. [**Skip Taskbar**](#skip-taskbar)
+    1. [**Web Preferences**](#web-preferences)
+    2. [**Window Resolution**](#window-resolution)
+    3. [**Frame**](#frame)
+    4. [**Window Resizing**](#window-resizing)
+    5. [**Show**](#show)
+    6. [**Skip Taskbar**](#skip-taskbar)
 13. [**Tray**](#tray)
     1. [**Create Tray**](#create-tray)
     2. [**Adding Event Listener**](#adding-event-listener)
@@ -367,6 +368,15 @@ menuTemplate.push({
 ```
 
 ## **Browser Window Configuration**
+
+#### **Web Preferences**
+
+```javascript
+webPreferences: {
+    nodeIntegration: true, // Allows to integrate node modules
+    backgroundThrottling: false, // Prevents from app getting freezed in the background
+},
+```
 
 #### **Window Resolution**
 
