@@ -30,10 +30,10 @@ A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s
 17. [**Create Tray**](#create-tray)
 18. [**Adding Event Listener**](#adding-event-listener)
 19. [**Bounds**](#bounds)
-20. [**Get Bounds**](#get-bounds)
-    1. [**Through Window Position**](#through-window-position)
-    2. [**Through Event**](#through-event)
-21. [**Set Bounds**](#set-bounds)
+    1. [**Get Bounds**](#get-bounds)
+        1. [**Through Window Position**](#through-window-position)
+        2. [**Through Event**](#through-event)
+    2. [**Set Bounds**](#set-bounds)
 
 ## **About**
 
@@ -396,15 +396,15 @@ app.on("ready", () => {
 -   Allows you to see the position of where the event happened on the screen.
 -   Bounds are automatically passed to the callback function with event by electron.
 
-### **Get Bounds**
+#### **Get Bounds**
 
-#### **Through Window Position**
+##### **Through Window Position**
 
 ```javascript
 const { height, width } = mainWindow.getBounds();
 ```
 
-#### **Through Event**
+##### **Through Event**
 
 ```javascript
 tray.on("click", (event, bounds) => {
@@ -414,7 +414,7 @@ tray.on("click", (event, bounds) => {
 });
 ```
 
-### **Set Bounds**
+#### **Set Bounds**
 
 -   We can set the position of the window with `setBounds()`.
 -   It takes x position, y position to be displayed at and the width & height of the window to be displayed.
