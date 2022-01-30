@@ -10,29 +10,34 @@ A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s
     3. [**Why?**](#why)
 2. [**Installing Electron**](#installing-electron)
 3. [**Setting Up**](#setting-up)
-4. [**Power of Electron**](#power-of-electron)
-5. [**IPC**](#ipc)
+4. [**Event Listeners**](#event-listeners)
+    1. [**Ready**](#ready)
+    2. [**Click**](#click)
+    3. [**Right Click**](#right-click)
+    4. [**Blur**](#blur)
+5. [**Power of Electron**](#power-of-electron)
+6. [**IPC**](#ipc)
     1. [**IPC Difference**](#ipc-difference)
     2. [**Enable Node Modules on Renderer**](#enable-node-modules-on-renderer)
     3. [**Send data from Renderer to Main**](#send-data-from-renderer-to-main)
     4. [**Send Data from Main to Renderer**](#send-data-from-main-to-renderer)
-6. [**Custom Menu**](#custom-menu)
-7. [**Add New Window**](#add-new-window)
-8. [**Function based on Environment**](#function-based-on-environment)
-9. [**Garbage Collection**](#garbage-collection)
-10. [**Roles**](#roles)
-11. [**Browser Window Configuration**](#browser-window-configuration)
+7. [**Custom Menu**](#custom-menu)
+8. [**Add New Window**](#add-new-window)
+9. [**Function based on Environment**](#function-based-on-environment)
+10. [**Garbage Collection**](#garbage-collection)
+11. [**Roles**](#roles)
+12. [**Browser Window Configuration**](#browser-window-configuration)
     1. [**Window Resolution**](#window-resolution)
     2. [**Frame**](#frame)
     3. [**Window Resizing**](#window-resizing)
     4. [**Show**](#show)
     5. [**Skip Taskbar**](#skip-taskbar)
-12. [**Tray**](#tray)
+13. [**Tray**](#tray)
     1. [**Create Tray**](#create-tray)
     2. [**Adding Event Listener**](#adding-event-listener)
     3. [**Tool Tip**](#tool-tip)
     4. [**Context Menu**](#context-menu)
-13. [**Bounds**](#bounds)
+14. [**Bounds**](#bounds)
     1. [**Get Bounds**](#get-bounds)
         1. [**Through Window Position**](#through-window-position)
         2. [**Through Event**](#through-event)
@@ -70,12 +75,21 @@ $ npm install electron
 
 ## **Setting Up**
 
+-   Add _`electron .`_ as the start script in your _`package.json`_
+
+```json
+...
+"scripts: [
+    "start": "electron ."
+]
+...
+```
+
 1. Create `index.js` file.
 2. Import electron module (with require).
 3. Extract `app` & `BrowserWindow` object from electron.
 4. Add `ready` event listener on `app`.
 5. Create new `BrowserWindow` object in the callback function.
-   ![Events](https://github.com/StephenGrider/ElectronCode/blob/master/diagrams/001%20-%20events.png?raw=true)
 
 ```javascript
 // Import electron
@@ -91,6 +105,52 @@ app.on("ready", () => {
 
     // Serve `index.html` file on the main window
     mainWindow.loadURL(`file://${__dirname}/index.html`);
+});
+```
+
+## **Event Listeners**
+
+-   Allows you to listen for an event on a particular window or app.
+
+![Events](https://github.com/StephenGrider/ElectronCode/blob/master/diagrams/001%20-%20events.png?raw=true)
+
+#### **Ready**
+
+-   `ready` is used when window is ready (completely rendered).
+
+```javascript
+mainWindow.on("ready", () => {
+    console.log("You are ready!");
+});
+```
+
+#### **Click**
+
+-   `click` is used when user clicks on the window.
+
+```javascript
+mainWindow.on("click", () => {
+    console.log("You Just Clicked!");
+});
+```
+
+#### **Right Click**
+
+-   `right-click` is used when user right clicks on the window.
+
+```javascript
+mainWindow.on("right-click", () => {
+    console.log("You Just Right Clicked!");
+});
+```
+
+#### **Blur**
+
+-   `blur` is used when user looses it's focus from the window.
+
+```javascript
+mainWindow.on("blur", () => {
+    console.log("You Lost Focus!");
 });
 ```
 
