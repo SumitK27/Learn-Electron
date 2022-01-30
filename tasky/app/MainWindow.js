@@ -1,11 +1,11 @@
 const { BrowserWindow } = require("electron");
 
 class MainWindow extends BrowserWindow {
-    constructor() {
+    constructor(url) {
         super({
             webPreferences: {
                 nodeIntegration: true,
-                contextIsolation: false,
+                backgroundThrottling: false,
             },
             width: 300,
             height: 500,
@@ -15,6 +15,7 @@ class MainWindow extends BrowserWindow {
             skipTaskbar: true,
         });
 
+        this.loadURL(url);
         this.on("blur", this.onBlur.bind(this));
     }
 
