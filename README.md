@@ -31,6 +31,7 @@ A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s
     1. [**Create Tray**](#create-tray)
     2. [**Adding Event Listener**](#adding-event-listener)
     3. [**Tool Tip**](#tool-tip)
+    4. [**Context Menu**](#context-menu)
 13. [**Bounds**](#bounds)
     1. [**Get Bounds**](#get-bounds)
         1. [**Through Window Position**](#through-window-position)
@@ -414,6 +415,28 @@ const tray = new Tray();
 
 // Setting tooltip
 tray.setToolTip("Timer App");
+```
+
+#### **Context Menu**
+
+-   Context Menu can be added to the Tray with the help of `popUpContextMenu` method on tray object.
+-   `popUpContextMenu` takes Menu Template as a parameter to display the menu items in the context menu.
+
+```javascript
+tray.on("right-click", () => {
+    // Create context menu items
+    const menuConfig = Menu.buildFromTemplate([
+        {
+            label: "Quit",
+            click: () => {
+                app.quit();
+            },
+        },
+    ]);
+
+    // Adding Context Menu
+    tray.popUpContextMenu(menuConfig);
+});
 ```
 
 ## **Bounds**
