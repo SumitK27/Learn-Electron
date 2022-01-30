@@ -5,22 +5,35 @@
 A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s Course [Electron for Desktop Apps The Complete Developer's Guide](https://www.udemy.com/course/electron-react-tutorial/)
 
 1. [**About**](#about)
-   1. [**Limitation of Browser**](#limitation-of-browser)
-   2. [**Difference**](#difference)
-   3. [**Why?**](#why)
+    1. [**Limitation of Browser**](#limitation-of-browser)
+    2. [**Difference**](#difference)
+    3. [**Why?**](#why)
 2. [**Installing Electron**](#installing-electron)
 3. [**Setting Up**](#setting-up)
 4. [**Power of Electron**](#power-of-electron)
 5. [**IPC**](#ipc)
-   1. [**IPC Difference**](#ipc-difference)
-   2. [**Enable Node Modules on Renderer**](#enable-node-modules-on-renderer)
-   3. [**Send data from Renderer to Main**](#send-data-from-renderer-to-main)
-   4. [**Send Data from Main to Renderer**](#send-data-from-main-to-renderer)
+    1. [**IPC Difference**](#ipc-difference)
+    2. [**Enable Node Modules on Renderer**](#enable-node-modules-on-renderer)
+    3. [**Send data from Renderer to Main**](#send-data-from-renderer-to-main)
+    4. [**Send Data from Main to Renderer**](#send-data-from-main-to-renderer)
 6. [**Custom Menu**](#custom-menu)
 7. [**Add New Window**](#add-new-window)
 8. [**Function based on Environment**](#function-based-on-environment)
 9. [**Garbage Collection**](#garbage-collection)
 10. [**Roles**](#roles)
+11. [**Browser Window Configuration**](#browser-window-configuration)
+12. [**Window Resolution**](#window-resolution)
+13. [**Frame**](#frame)
+14. [**Window Resizing**](#window-resizing)
+15. [**Show**](#show)
+16. [**Tray**](#tray)
+17. [**Create Tray**](#create-tray)
+18. [**Adding Event Listener**](#adding-event-listener)
+19. [**Bounds**](#bounds)
+20. [**Get Bounds**](#get-bounds)
+    1. [**Through Window Position**](#through-window-position)
+    2. [**Through Event**](#through-event)
+21. [**Set Bounds**](#set-bounds)
 
 ## **About**
 
@@ -287,5 +300,130 @@ ipcMain.on("todo:add", (event, todo) => {
 menuTemplate.push({
     label: "View",
     submenu: [{ role: "reload" }],
+});
+```
+
+## **Browser Window Configuration**
+
+### **Window Resolution**
+
+-   We can set the default width and height of the window with the keys `width` and `height` and set it to the pixel value.
+
+```javascript
+mainWindow = new BrowserWindow({
+    width: 300,
+    height: 500,
+});
+```
+
+### **Frame**
+
+-   The frame contains the menu bar and the title bar to minimize, full-screen or close the application.
+-   `frame` can be set to false if we don't want to display the frame.
+
+```javascript
+mainWindow = new BrowserWindow({
+    frame: false,
+});
+```
+
+### **Window Resizing**
+
+-   We can set whether we want the user to resize our app screen or not.
+-   `resizable` is the flag used to enable or disable the resizing of the window.
+-   Default value is true.
+
+```javascript
+mainWindow = new BrowserWindow({
+    resizable: false,
+});
+```
+
+### **Show**
+
+-   `show` allows you to either show or hide the window when the application is launched.
+-   By default `show` is set to `true`.
+
+```javascript
+mainWindow = new BrowserWindow({
+    show: false,
+});
+```
+
+## **Tray**
+
+### **Create Tray**
+
+-   Electron has a Tray object which allows you to create a tray icon for your application.
+-   Every Tray has an icon.
+-   Icon doesn't needs to have the specific resolution indicator (eg. _icon@2x.png_), Electron adjusts the icon to be used automatically.
+
+```javascript
+// Import Tray from electron
+const { Tray } = require("electron");
+
+app.on("ready", () => {
+    ...
+    const iconName = "windows-icon.png";
+    const iconPath = path.join(__dirname, `./src/assets/${iconName}`);
+    // Adding Tray Icon of Application
+    new Tray(iconPath);
+});
+```
+
+### **Adding Event Listener**
+
+```javascript
+let tray;
+
+app.on("ready", () => {
+    ...
+    tray = new Tray();
+
+    // Click Event Listener on Tray
+    tray.on("click", () => {
+        if (mainWindow.isVisible()) {
+            mainWindow.hide();
+        } else {
+            mainWindow.show();
+        }
+    });
+})
+```
+
+## **Bounds**
+
+-   Allows you to see the position of where the event happened on the screen.
+-   Bounds are automatically passed to the callback function with event by electron.
+
+### **Get Bounds**
+
+#### **Through Window Position**
+
+```javascript
+const { height, width } = mainWindow.getBounds();
+```
+
+#### **Through Event**
+
+```javascript
+tray.on("click", (event, bounds) => {
+    console.log(bounds.x, bounds.y);
+    // Windows: Somewhere around (1283, 824) -> (1315, 784) ie. lower right (position of tray on taskbar)
+    // MacOS: top-right
+});
+```
+
+### **Set Bounds**
+
+-   We can set the position of the window with `setBounds()`.
+-   It takes x position, y position to be displayed at and the width & height of the window to be displayed.
+
+```javascript
+mainWindow.setBounds({
+    x: xPosition,
+    y: yPosition,
+    width: widthValue,
+    height: heightValue,
 });
 ```
