@@ -30,6 +30,7 @@ A follow-along repository of [StephenGrider](https://github.com/StiphenGrider)'s
 12. [**Tray**](#tray)
     1. [**Create Tray**](#create-tray)
     2. [**Adding Event Listener**](#adding-event-listener)
+    3. [**Tool Tip**](#tool-tip)
 13. [**Bounds**](#bounds)
     1. [**Get Bounds**](#get-bounds)
         1. [**Through Window Position**](#through-window-position)
@@ -401,6 +402,18 @@ app.on("ready", () => {
         }
     });
 })
+```
+
+#### **Tool Tip**
+
+-   ToolTips are used to display the short information whenever we hover on some object.
+-   `setToolTip` method can be used on the tray object to set the tool tip.
+
+```javascript
+const tray = new Tray();
+
+// Setting tooltip
+tray.setToolTip("Timer App");
 ```
 
 ## **Bounds**
